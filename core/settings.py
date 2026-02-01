@@ -34,6 +34,12 @@ DEBUG = os.getenv("DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://api-kanmind.susanne-renken.com",
+    "https://kanmind.susanne-renken.com",
+]
+
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
