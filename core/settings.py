@@ -30,7 +30,7 @@ if not SECRET_KEY:
     raise RuntimeError("SECRET_KEY is not set")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", "True") == "True"
+DEBUG = os.getenv("DEBUG") == "True"
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 
@@ -39,6 +39,8 @@ CSRF_TRUSTED_ORIGINS = [
     "https://kanmind.susanne-renken.com",
 ]
 
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 LOGGING = {
     "version": 1,
@@ -81,7 +83,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "https://kanmind.susanne-renken.com",
+]
 
 ROOT_URLCONF = 'core.urls'
 
