@@ -1,10 +1,23 @@
 services:
+  db:
+    image: postgres:16
+    container_name: kanmind-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
   backend:
     build: .
     container_name: kanmind-backend
+    restart: unless-stopped
     env_file:
       - .env
-    ports:
-      - "8001:8001"
-    volumes:
-      - .:/app
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
